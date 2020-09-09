@@ -574,7 +574,7 @@ function prepareData() {
         } else {
             alert("To była ostatnia strona!");
         }
-    }, 500);
+    }, 250);
 }
 
 function download(content, fileName = 'dane.csv', contentType = 'text/csv') {

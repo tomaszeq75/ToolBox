@@ -1,6 +1,6 @@
 /**
  numery telefonów zwraca tylko komórkowe
- numery z przecinkami wpisać w klasie .numbers
+ numery z przecinkami wpisać w klasie .numbers w index.html
  */
 
 function checkPhoneNumbers() {
@@ -11,7 +11,7 @@ function checkPhoneNumbers() {
     ];
 
     numbers = document.querySelector(".numbers").innerText.split(",");
-    console.log(numbers);
+    console.log(numbers); //?
     console.log(numbers.filter((num) => Number.parseInt(num)));
 
     const onlyMobile = (num) => {
@@ -19,7 +19,7 @@ function checkPhoneNumbers() {
         return !prefix.find((pre) => pre == first2Digits);
         // console.log(num, val);
     }
-
+let a = 2+2*2; //?
     const mobileNumbers = numbers
         .filter((num) => Number.parseInt(num))
         .filter((num) => num.length == 9)
