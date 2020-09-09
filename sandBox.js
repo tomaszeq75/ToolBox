@@ -171,7 +171,7 @@ let fruits = ["apple", "banana", "orange", "cherries", "jackfruit", "guava"];
 /**
  * zasięg zmiennych
  */
-function chechVariableScope() {
+function checkVariableScope() {
 
     getAArrow = () => {
         console.log(`a w => ${a}`);
@@ -187,19 +187,19 @@ function chechVariableScope() {
 
     // let ------------------------------------
     console.log('--- let - var, let, ""');
-    
+
     let a = 1; {
         //var a = 3;  // błąd 
         let a = 2;
         console.log(`LET a w bloku = ${a}`);
     }
     console.log(`LET a poza blokiem = ${a}`); // 1
-    
+
     getAArrow() // 1 wszędzie to samo
     getAfunc()
     getAconst()
-    
-    
+
+
     // var --------------------------------------
     console.log('--- VAR - var, let, ""');
 
@@ -214,9 +214,8 @@ function chechVariableScope() {
     const getGconst = function () {
         console.log(`g w const ${g}`);
     }
-    
-    var g = 1; 
-    {
+
+    var g = 1; {
         // var e = 3; // błąd 
         let g = 2;
         console.log(`VAR g w bloku = ${g}`);
@@ -228,36 +227,40 @@ function chechVariableScope() {
     getGconst()
     // ----------------------------------
 
-    // zagnieżdżone funkcje ----------------------------------
+    // zagnieżdżone funkcje (normalne) ----------------------------------
+    // this nie ma sensu wyswietla zmienne globalne
     console.log('------------ funkcje');
-    
+
+    const arrowFunction = (level, i) => {
+        console.log(`arrowFunction level ${level}   i = ${i}   this.i = ${this.i}`);
+    } 
+
     let h = 'h'
-    let i = 'iii'
-    function level1(){
-        let i = 'i';
-        console.log(`level 1 h = ${h}   i = ${i},   this.i = ${this.i}`);
+    var i = 'iii'
+    
+    function level1(i) {
+        // let i = 'i';
+        console.log(`        level 1 h = ${h}   i = ${i},  this.i = ${this.i}`);
+        arrowFunction(1,i)
         
-        function level2() {
-            this.i = 'ii';
-            console.log(`level 2 h = ${h}   i = ${i},   this.i = ${this.i}`);
+        function level2(i) {
+            console.log(`        level 2 h = ${h}   i = ${i},  this.i = ${this.i}`);
+            arrowFunction(2,i)
             
-            function level3() {
-                 console.log(`level 3 h = ${h}   i = ${i},   this.i = ${this.i}`);
+            function level3(i) {
+                console.log(`        level 3 h = ${h}   i = ${i},  this.i = ${this.i}`);
+                arrowFunction(3,i)
             }
-            level3()
+            level3(33)
         }
-        level2()
+        level2(22)
     }
-    level1()
+    level1(11)
     level1()
     console.log(i, this.i);
-    
-
-
-
 
 }
-chechVariableScope()
+checkVariableScope()
 
 /**
  * promises
