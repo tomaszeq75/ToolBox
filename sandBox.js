@@ -171,6 +171,10 @@ let fruits = ["apple", "banana", "orange", "cherries", "jackfruit", "guava"];
 /**
  * zasięg zmiennych
  */
+
+let person = {}
+let levels = {}
+
 function checkVariableScope() {
 
     getAArrow = () => {
@@ -233,23 +237,23 @@ function checkVariableScope() {
 
     const arrowFunction = (level, i) => {
         console.log(`arrowFunction level ${level}   i = ${i}   this.i = ${this.i}`);
-    } 
+    }
 
     let h = 'h'
     var i = 'iii'
-    
+
     function level1(i) {
         // let i = 'i';
         console.log(`        level 1 h = ${h}   i = ${i},  this.i = ${this.i}`);
-        arrowFunction(1,i)
-        
+        arrowFunction(1, i)
+
         function level2(i) {
             console.log(`        level 2 h = ${h}   i = ${i},  this.i = ${this.i}`);
-            arrowFunction(2,i)
-            
+            arrowFunction(2, i)
+
             function level3(i) {
                 console.log(`        level 3 h = ${h}   i = ${i},  this.i = ${this.i}`);
-                arrowFunction(3,i)
+                arrowFunction(3, i)
             }
             level3(33)
         }
@@ -261,6 +265,99 @@ function checkVariableScope() {
 
 }
 checkVariableScope()
+
+function thisSandBox() {
+    /**
+     * "this" wskazuje:
+     *  1. gdy funkcja jest w obiekcie/klasie obiekt z kontekstu (lewej strony kropki) np: person.
+     *  2. w zwykłej funkcji obiekt globalny window/global
+     *  3. funkcja => nie ma kontekstu
+     *  */
+
+    console.log('-----------------------------------------------');
+    console.log('---------------- thisSandBox ------------------');
+
+    person = {
+        name: 'Tom',
+        showName() {
+            console.log('showName: ', this.name); // Tom
+            const logNameArr = () => {
+                console.log('logNameArr =>: ', this.name); // Tom - nie zmienia kontekstu 
+            }
+
+            const logName = function () {
+                console.log('logName: ', this.name); // {} window
+            }
+
+            logName()                             // {} window  
+            logNameArr()                          // Tom - nie zmienia kontekstu
+        },
+        showName2: function () { console.log('showName2: ', this.name) },    // Tom
+        showNameArr: () => { console.log('showNameArr =>: ', this.name) },    // {}
+        address: {
+            city: 'Warsaw',
+            street: 'Złota',
+            nr: 40,
+            log() {
+                console.log('log: ', this) // obiekt address
+                logInside = () => {
+                    console.log('logInside: ', this) // obiekt address
+                }
+                logInside()
+            },
+            logArrow: () => console.log('logArrow: ', this), // objekt Window
+        }
+    }
+
+    person.showName();          // Tom
+    person.showName2();         // Tom
+    person.showNameArr();       // {}
+    person.address.log();
+    person.address.logArrow();
+
+    const dog = {
+        name: "Magłej",
+        showName: person.showName,          // przypisanie fungcji z innego obiektu
+        showNameArr: person.showNameArr
+    }
+
+    console.log('--- dog ---');
+    dog.showName();         // Magłej
+    dog.showNameArr();
+
+    (function () { console.log('--- levels ---') }()); // funkcja anonimowa samo wywołująca się
+
+
+    levels = {
+        level: '1',
+        showL1: function () { console.log(`fun level: 1     this.level = ${this.level}`); },
+        showL1Arrow: () => { console.log(`=>  level: 1     this.level = ${this.level}`); },
+        next: {
+            level: '2',
+            showL1: function () { console.log(`fun level: 2     this.level = ${this.level}`); },
+            showL1Arrow: () => { console.log(`=>  level: 2     this.level = ${this.level}`); },
+            next: {
+                level: '3',
+                showL1: function () {
+                    console.log(`fun level: 3     this.level = ${this.level}`);
+                },
+                showL1Arrow: () => {
+                    console.log(`=>  level: 3     this.level = ${this.level}`);
+                },
+            }
+        }
+    }
+
+    levels.showL1()
+    levels.showL1Arrow()
+    levels.next.showL1()
+    levels.next.showL1Arrow()
+    levels.next.next.showL1()
+    levels.next.next.showL1Arrow()
+}
+
+thisSandBox();
+
 
 /**
  * promises
