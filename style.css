@@ -1,0 +1,9 @@
+.numbersTest {
+    display : none;
+}
+
+.filtered {
+    color: blue;
+    width: min-content;
+}
+
