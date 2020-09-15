@@ -33,7 +33,7 @@ var win = window,
 let d;
 
 subDomains.forEach(element => {
-    setTimeout(getEmail(element), 1000);
+    getEmail(element);
 });
 
 function getEmail(subDomain) {
@@ -42,9 +42,9 @@ function getEmail(subDomain) {
         aMailTo = doc.getElementById('mailto').href;
         email = aMailTo.slice(7, aMailTo.length);
         emails.push(email);
-        d.close();
-    }, 300);
-}
+        alert(`${subDomain} - ${email}`);
+    }, 2000);
+};
 
 // aMailTo = doc.getElementById('mailto').href;
 // alert(email);
