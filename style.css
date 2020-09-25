@@ -1,9 +1,21 @@
+
+div {
+    font:  400 smaller 'Roboto';
+    overflow-wrap: break-word;
+    overflow: auto;
+    width: auto;
+    margin: 2em 0;
+}
+
 .numbersTest {
     display : none;
 }
 
 .filtered {
     color: blue;
-    width: min-content;
+}
+
+.numbers {
+    height: 300px;
 }
 
