@@ -1,0 +1,24 @@
+div + p {
+    color: blue;
+}
+
+div :first-child{
+    color: crimson;
+}
+
+p:hover, ul :hover{
+    font-weight: bolder;
+}
+
+ul :nth-child(3n+2) {
+    color: orange;
+}
+
+li:last-of-type {
+    background: orchid;
+}
+
+input:in-range {
+    border: 1px solid blue;
+    background: palegreen;
+    }

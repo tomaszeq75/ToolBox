@@ -39,11 +39,14 @@ subDomains.forEach(element => {
 function getEmail(subDomain) {
     d = win.open(`https://${subDomain}/`, 'startme_popup');
     win.setTimeout(function () {
-        aMailTo = doc.getElementById('mailto').href;
-        email = aMailTo.slice(7, aMailTo.length);
-        emails.push(email);
-        alert(`${subDomain} - ${email}`);
-    }, 2000);
+        if (d) {
+            d.focus();
+            aMailTo = doc.getElementById('mailto').href;
+            email = aMailTo.slice(7, aMailTo.length);
+            emails.push(email);
+            alert(`${subDomain} - ${email}`);
+        }
+    }, 1000);
 };
 
 // aMailTo = doc.getElementById('mailto').href;
