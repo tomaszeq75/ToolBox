@@ -16,7 +16,7 @@ function fillForm() {
         email = 'promocja@intermoto.pl',
         phone = '123123123';
 
-    window.scrollTo(0, window.outerWidth);
+    window.scrollTo(0, 5000);
 
     contentField.innerHTML = content;
     emailField.value = email;
@@ -26,8 +26,8 @@ function fillForm() {
     setTimeout(() => {
         const captchaCode = prompt("Podaj kod z obrazka");
         captchaField.value = captchaCode;
+        if (captchaCode) sendButton.click();
     }, 200);
-    sendButton.click();
 };
 
 fillForm();
