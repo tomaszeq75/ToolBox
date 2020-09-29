@@ -26,14 +26,17 @@ function fillForm() {
     const email = 'promocja@intermoto.pl',
         phone = '123123123';
 
-    window.scrollTo(0, 5000);
+    let rodoDialog = document.getElementById('cross-dialog');
+    if (rodoDialog) rodoDialog.style.display = 'none';
+
+    window.scrollTo(0, 10000);
 
     emailField.value = email;
     phoneField.value = phone;
     checkBox.checked = true;
 
     setTimeout(() => {
-        const promptCode = prompt("Podaj kod z obrazka\n\nDla pojazdów innych niż osobowe użyj na początku:\nc - ciężarowe\nm - motocykle\nr - rolnicze\nb - budowlane\np - przyczepy");
+        const promptCode = prompt("Podaj kod z obrazka (1234 lub x1234)\n\nDla pojazdów innych niż osobowe użyj na początku:\nc - ciężarowe\nm - motocykle\nr - rolnicze\nb - budowlane\np - przyczepy");
         const [captchaCode, choise] = checkPromptCode(promptCode);
         const content = makeContent(choise);
 
@@ -81,7 +84,7 @@ function fillForm() {
     }
 
 
-    
+
     function makeContent(choise) {
         let content = contentTexts.intro;
         content += contentTexts[choise];
