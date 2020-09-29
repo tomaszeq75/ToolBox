@@ -11,8 +11,8 @@ function fillForm() {
         checkBox = document.getElementById('kontakt-zgoda'),
         sendButton = document.getElementById('wyslij_dol');
 
-    const content = 'Witam, \n\nWiedzą Państwo, że na intermoto.pl można ZA DARMO wstawiać dowolną ilość ogłoszeń sprzedaży samochodów, motocykli i innych pojazdów a także części?\n\n' +
-        'Można je także importować z:\n- Akol\n- Automarket\n- Autopanel\n- Allegro\n\nTwoja konkurencja już u nas jest. A TY?\n\nZapraszamy.\nZespół intermoto.pl',
+    const content = 'Witam, <br><br>Wiedzą Państwo, że na <b>intermoto.pl</b> można <b>ZA DARMO</b> wstawiać dowolną ilość ogłoszeń sprzedaży samochodów, motocykli i innych pojazdów a także części?<br><br>' +
+        'Można je także importować z:<br>- Akol<br>- Automarket<br>- Autopanel<br>- Allegro<br><br><b>Twoja konkurencja już u nas jest. A TY?</b><br><br>Zapraszamy.<br>Zespół <b>intermoto.pl</b>',
         email = 'promocja@intermoto.pl',
         phone = '123123123';
 
@@ -26,8 +26,9 @@ function fillForm() {
     setTimeout(() => {
         const captchaCode = prompt("Podaj kod z obrazka");
         captchaField.value = captchaCode;
-        if (captchaCode) sendButton.click();
+        if (captchaCode) {sendButton.click()} else captchaField.focus();
     }, 200);
 };
 
 fillForm();
+
