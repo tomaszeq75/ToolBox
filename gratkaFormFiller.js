@@ -36,15 +36,21 @@ function fillForm() {
     checkBox.checked = true;
 
     setTimeout(() => {
-        const promptCode = prompt("Podaj kod z obrazka (1234 lub x1234)\n\nDla pojazdów innych niż osobowe użyj na początku:\nc - ciężarowe\nm - motocykle\nr - rolnicze\nb - budowlane\np - przyczepy");
-        const [captchaCode, choise] = checkPromptCode(promptCode);
+        let promptCode = prompt("Podaj kod z obrazka (1234 lub x1234)\n\nDla pojazdów innych niż osobowe użyj na początku:\nc - ciężarowe\nm - motocykle\nr - rolnicze\nb - budowlane\np - przyczepy");
+        let [captchaCode, choise] = checkPromptCode(promptCode);
         const content = makeContent(choise);
 
         contentField.innerHTML = content;
         captchaField.value = captchaCode;
 
         if (captchaCode) {
-            sendButton.click()
+            sendButton.click();
+            setTimeout(()=>{
+                if (document.getElementById('komunikat-blad')) {
+                    captchaField.value = prompt("Podaj kod z obrazka");
+                    sendButton.click();
+                }
+            }, 300);
         }
     }, 200);
 
