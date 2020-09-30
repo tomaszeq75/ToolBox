@@ -50,9 +50,6 @@ function fillForm() {
                     captchaField.value = prompt("Podaj kod z obrazka");
                     sendButton.click();
                 }
-                if (document.querySelector('.sukces')) {
-                    window.close();
-                }
             }, 300);
         }
     }, 200);
